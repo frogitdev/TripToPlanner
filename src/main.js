@@ -12,10 +12,12 @@ window.onload = function() {
     // "file" 파라미터 값 읽기
     const jsonDomain = urlParams.get("domain");
     const jsonFile = urlParams.get("file");
+    const devMode = urlParams.get("devmode");
 
     if (jsonDomain) {
+        const theURL = devMode ? `http://${jsonDomain}/${jsonFile}` : `https://${jsonDomain}/${jsonFile}`
         // Fetch API로 JSON 파일 읽기
-        fetch(`http://${jsonDomain}/${jsonFile}`)
+        fetch(theURL)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
